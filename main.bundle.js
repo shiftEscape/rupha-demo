@@ -222,7 +222,10 @@ var AppComponent = (function () {
         };
         this.compute = function (title, value) {
             _this.totalCostEssentials = _this.costEssentials.map(function (x) { return x.value; }).reduce(function (a, c) { return Number(a) + Number(c); });
-            _this.remainingAmount = _this.netAmount - _this.totalCostEssentials - _this.totalGoals;
+            var tempRemaining = _this.netAmount - _this.totalCostEssentials - _this.totalGoals;
+            if (tempRemaining < 0)
+                return false;
+            _this.remainingAmount = tempRemaining;
             var twentyPercent = ((_this.netAmount / 10) * 2);
             var fiftyPercent = (_this.netAmount / 2);
             var thirtyPercent = ((_this.netAmount / 10) * 3);
